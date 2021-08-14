@@ -13,15 +13,15 @@
   get_url:
     url: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
     dest: ~/kube-flannel.yml
-  when: inventory_hostname == 'kmaster'
+  when: inventory_hostname == 'kmaster1'
 
 - name: Patch Flannel manifest with VirtualBox interface.
   patch:
     src: files/kube-flannel-patch.txt
     dest: ~/kube-flannel.yml
-  when: inventory_hostname == 'kmaster'
+  when: inventory_hostname == 'kmaster1'
 
 - name: Set the correct path for the patched Flannel manifest.
   set_fact:
     kubernetes_flannel_manifest_file: ~/kube-flannel.yml
-  when: inventory_hostname == 'kmaster'
+  when: inventory_hostname == 'kmaster1'
